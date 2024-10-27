@@ -26,9 +26,10 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"postgres": "^3.4.4",
+		"@sveltejs/kit": "^1.0.0",
+		"vite-plugin-mkcert": "^1.17.5",
 		"svelte": "^3.50.1",
-		"vite-plugin-mkcert": "^1.17.6"
+		"postgres": "^3.4.4"
 	},
 	"engines": {
 		"node": "18.x",
