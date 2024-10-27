@@ -1,8 +1,7 @@
 import postgres from 'postgres';
-import { PGCONNECT } from '$env/static/private';  // For local development
 
-// Use DATABASE_URL in production (Heroku), PGCONNECT in local development
-const connectionString = process.env.DATABASE_URL || PGCONNECT;
+// Use process.env.DATABASE_URL in production (Heroku), and PGCONNECT for local development.
+const connectionString = process.env.DATABASE_URL || import.meta.env.VITE_PGCONNECT;
 
 const sql = postgres(connectionString, {});
 
