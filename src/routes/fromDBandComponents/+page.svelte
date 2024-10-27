@@ -1,19 +1,20 @@
 <script>
-	import ContainerTable from '$lib/ContainerTable.svelte';
-	export let data;
+    import ContainerTable from '$lib/ContainerTable.svelte';
+    export let data; // Contains the data from the load function
 
-	let clickedContainerNumber = "none"
+    let clickedContainer = null;
 
-	function containerClicked(container) {
-		console.log('Container clicked:', container.containerNumber);
-		if (container) {
-			clickedContainerNumber = container.containerNumber
-		}
-	}
+    function handleContainerClick(container, event) {
+        console.log('Clicked container:', container);
+        clickedContainer = container;
+    }
 </script>
 
-<h1>Leaning into Svelte's approach: Components for UI elements</h1>
+<h1>Container Summary</h1>
 
-<ContainerTable containers={data.containers} onContainerClicked={containerClicked} />
+<!-- Pass containers from data to ContainerTable -->
+<ContainerTable containers={data.containers} onContainerClicked={handleContainerClick} />
 
-<span class=i>Last container clicked: {clickedContainerNumber}</span>
+{#if clickedContainer}
+    <p>Last clicked container: {clickedContainer.containernumber}</p>
+{/if}

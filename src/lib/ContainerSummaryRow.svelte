@@ -1,12 +1,12 @@
 <script>
-	export let container;
+    export let container; // Container object passed from the parent
 </script>
 
 <div class="row">
-	<div class="id">{container.containerNumber}</div>
-	<div class="shipname">{container.nameOfShip}</div>
-	<div class="date">{container.dateContainerShipped}</div>
-	<div class="size">{container.containerSize}</div>
+    <div class="id">{container.containernumber}</div>  <!-- Use lowercase property names -->
+    <div class="shipname">{container.nameofship}</div>
+    <div class="date">{container.datecontainershipped}</div>
+    <div class="size">{container.containersize}</div>
 </div>
 
 <style>
