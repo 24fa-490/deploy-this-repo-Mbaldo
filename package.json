@@ -6,7 +6,6 @@
 		"dev": "vite dev",
 		"build": "vite build",
 		"preview": "vite preview",
-		"start": "vite preview --port 8080",
 		"lint": "prettier --check . && eslint .",
 		"format": "prettier --write ."
 	},
@@ -26,10 +25,10 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@sveltejs/kit": "^1.0.0",
+		"postgres": "^3.4.4",
 		"vite-plugin-mkcert": "^1.17.5",
-		"svelte": "^3.50.1",
-		"postgres": "^3.4.4"
+		"@sveltejs/kit": "^1.0.0", 
+    	"svelte": "^3.50.1"
 	},
 	"engines": {
 		"node": "18.x",
