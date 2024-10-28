@@ -1,8 +1,11 @@
 import postgres from 'postgres';
 
-// Use process.env.DATABASE_URL in production (Heroku), and PGCONNECT for local development.
+// For production (Vercel or Heroku), it uses the DATABASE_URL, and for local development, it uses VITE_PGCONNECT
 const connectionString = process.env.DATABASE_URL || import.meta.env.VITE_PGCONNECT;
 
-const sql = postgres(connectionString, {});
+// Set up the connection, adding SSL option for production if required
+const sql = postgres(connectionString, {
+  ssl: process.env.DATABASE_URL ? { rejectUnauthorized: false } : false,  // Enable SSL in production
+});
 
 export default sql;

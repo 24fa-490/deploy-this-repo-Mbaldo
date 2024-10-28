@@ -1,20 +1,25 @@
 import sql from '$lib/server/database';
 
 export async function load() {
-    // Fetch the current containers from the database
-    const rows = await sql`
-    SELECT
-        containerNumber,
-        nameOfShip,
-        containerSize,
-        dateContainerShipped
-    FROM
-        containers`;
+    try {
+        // Fetch the current containers from the database
+        const rows = await sql`
+        SELECT
+            containerNumber,
+            nameOfShip,
+            containerSize,
+            dateContainerShipped
+        FROM
+            containers`;
 
-    console.log({ rows });
+        console.log({ rows });
 
-    // Return the data to the Svelte page
-    return { containers: rows };
+        // Return the data to the Svelte page
+        return { containers: rows };
+    } catch (error) {
+        console.error('Database fetch error:', error);
+        return { error: 'Failed to fetch containers from the database' };
+    }
 }
 
 export const actions = {
