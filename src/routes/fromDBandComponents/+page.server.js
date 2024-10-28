@@ -2,7 +2,7 @@ import sql from '$lib/server/database';
 
 export async function load() {
     try {
-        // Fetch the current containers from the database
+        // Await the database query to ensure it resolves
         const rows = await sql`
         SELECT
             containerNumber,
@@ -12,41 +12,12 @@ export async function load() {
         FROM
             containers`;
 
-        console.log({ rows });
+        console.log({ rows });  // This will now log the actual rows
 
         // Return the data to the Svelte page
         return { containers: rows };
     } catch (error) {
-        console.error('Database fetch error:', error);
-        return { error: 'Failed to fetch containers from the database' };
+        console.error('Error fetching containers from database:', error);
+        return { containers: [], error: 'Failed to fetch containers.' };
     }
 }
-
-export const actions = {
-    default: async ({ request }) => {
-        const formData = await request.json();
-
-        const { containerNumber, nameOfShip, containerSize, dateContainerShipped } = formData;
-
-        try {
-            // Insert the form data into the database
-            await sql`
-                INSERT INTO containers (
-                    containerNumber,
-                    nameOfShip,
-                    containerSize,
-                    dateContainerShipped
-                ) VALUES (
-                    ${containerNumber},
-                    ${nameOfShip},
-                    ${containerSize},
-                    ${dateContainerShipped}
-                )`;
-
-            return { success: true, message: 'Container added successfully!' };
-        } catch (error) {
-            console.error('Database insert error:', error);
-            return { success: false, error: 'Failed to add container.' };
-        }
-    }
-};
